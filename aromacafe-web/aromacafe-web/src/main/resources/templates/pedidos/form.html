@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo pedido - AromaCafe</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #FBF7F2; color: #333; }
+        h1 { color: #5B3A29; }
+        form { background: white; padding: 20px; border-radius: 6px; max-width: 600px; }
+        label { display: block; margin-top: 12px; font-weight: bold; }
+        select, input { padding: 8px; margin-top: 4px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #5B3A29; color: white; }
+        button { background: #B45309; color: white; padding: 10px 16px; border: none; border-radius: 4px; margin-top: 16px; cursor: pointer; }
+        a { color: #B45309; }
+    </style>
+</head>
+<body>
+    <h1>Nuevo pedido</h1>
+    <form th:action="@{/pedidos/guardar}" method="post">
+        <label>Cliente</label>
+        <select name="idCliente">
+            <option value="">-- Consumidor final --</option>
+            <option th:each="c : ${clientes}" th:value="${c.idCliente}" th:text="${c.nombre}"></option>
+        </select>
+
+        <label>ID Empleado (usuario)</label>
+        <input type="number" name="idUsuario" value="1" required>
+
+        <label>ID Mesa (opcional)</label>
+        <input type="number" name="idMesa">
+
+        <label>Tipo</label>
+        <select name="tipo">
+            <option value="Local">Local</option>
+            <option value="Para llevar">Para llevar</option>
+            <option value="Domicilio">Domicilio</option>
+        </select>
+
+        <label>Productos</label>
+        <table>
+            <thead><tr><th>Producto</th><th>Precio</th><th>Cantidad</th></tr></thead>
+            <tbody>
+                <tr th:each="p : ${productos}">
+                    <td>
+                        <span th:text="${p.nombre}"></span>
+                        <input type="hidden" name="idProducto" th:value="${p.idProducto}">
+                    </td>
+                    <td th:text="${p.precio}"></td>
+                    <td><input type="number" name="cantidad" value="0" min="0" style="width:70px"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="submit">Crear pedido</button>
+    </form>
+    <p><a th:href="@{/pedidos}">← Volver</a></p>
+</body>
+</html>

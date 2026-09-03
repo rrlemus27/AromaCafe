@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - AromaCafe</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #FBF7F2; color: #333; }
+        h1 { color: #5B3A29; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #5B3A29; color: white; }
+        tr:nth-child(even) { background: #EADDD0; }
+        a.btn { background: #B45309; color: white; padding: 8px 14px; text-decoration: none; border-radius: 4px; }
+        a.link { color: #B45309; text-decoration: none; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Clientes</h1>
+    <p><a class="btn" th:href="@{/clientes/nuevo}">+ Nuevo cliente</a>
+       &nbsp; <a class="link" th:href="@{/}">← Inicio</a></p>
+    <table>
+        <thead>
+            <tr><th>ID</th><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Dirección</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${clientes}">
+                <td th:text="${c.idCliente}"></td>
+                <td th:text="${c.nombre}"></td>
+                <td th:text="${c.telefono}"></td>
+                <td th:text="${c.correo}"></td>
+                <td th:text="${c.direccion}"></td>
+                <td>
+                    <a class="link" th:href="@{/clientes/editar/{id}(id=${c.idCliente})}">Editar</a>
+                    <a class="link" th:href="@{/clientes/eliminar/{id}(id=${c.idCliente})}"
+                       onclick="return confirm('¿Eliminar este cliente?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

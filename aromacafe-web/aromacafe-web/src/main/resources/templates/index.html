@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AromaCafe</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #FBF7F2; color: #333; }
+        header { background: #5B3A29; color: white; padding: 30px 40px; }
+        header h1 { margin: 0; }
+        .menu { display: flex; gap: 20px; padding: 40px; flex-wrap: wrap; }
+        .card { background: white; padding: 30px; border-radius: 8px; width: 200px; text-align: center;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-decoration: none; color: #5B3A29; }
+        .card:hover { background: #EADDD0; }
+        .card h2 { margin: 0 0 8px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AromaCafe</h1>
+        <p>Sistema de gestión de cafetería</p>
+    </header>
+    <div class="menu">
+        <a class="card" th:href="@{/productos}"><h2>Productos</h2><p>Gestionar catálogo</p></a>
+        <a class="card" th:href="@{/clientes}"><h2>Clientes</h2><p>Gestionar clientes</p></a>
+        <a class="card" th:href="@{/pedidos}"><h2>Pedidos</h2><p>Registrar y ver pedidos</p></a>
+    </div>
+</body>
+</html>

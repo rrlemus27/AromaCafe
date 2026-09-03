@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Producto - AromaCafe</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #FBF7F2; color: #333; }
+        h1 { color: #5B3A29; }
+        form { background: white; padding: 20px; border-radius: 6px; max-width: 400px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+        button { background: #B45309; color: white; padding: 10px 16px; border: none; border-radius: 4px; margin-top: 16px; cursor: pointer; }
+        a { color: #B45309; }
+    </style>
+</head>
+<body>
+    <h1 th:text="${producto.idProducto} == 0 ? 'Nuevo producto' : 'Editar producto'"></h1>
+    <form th:action="${producto.idProducto} == 0 ? @{/productos/guardar} : @{/productos/actualizar/{id}(id=${producto.idProducto})}"
+          method="post" th:object="${producto}">
+        <label>Nombre</label>
+        <input type="text" th:field="*{nombre}" required>
+        <label>Descripción</label>
+        <input type="text" th:field="*{descripcion}">
+        <label>Precio</label>
+        <input type="number" step="0.01" th:field="*{precio}" required>
+        <label>ID Categoría</label>
+        <input type="number" th:field="*{idCategoria}" required>
+        <label>Disponible</label>
+        <input type="checkbox" th:field="*{disponible}">
+        <button type="submit">Guardar</button>
+    </form>
+    <p><a th:href="@{/productos}">← Volver</a></p>
+</body>
+</html>
